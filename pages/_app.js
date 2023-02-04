@@ -1,23 +1,14 @@
-import Layout from "../components/Layout";
-import "../styles/globals.css";
-import { ToastContainer } from "react-toastify";
+import EventCard from '../components/events/EventCard'
+import Layout from '../components/Layout'
+import { EventsContext } from '../context/eventsContext'
+import '../styles/globals.css'
+
 function MyApp({ Component, pageProps }) {
-  return (
-    <>
+  return (<EventsContext>
+    <Layout>
       <Component {...pageProps} />
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
-    </>
-  );
+    </Layout>
+  </EventsContext>)
 }
 
 export default MyApp;
