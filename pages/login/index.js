@@ -10,7 +10,7 @@ function Index(props){
     const [index, setIndex] = useState(0)
     const imgArr = [""]
     const [isLogin, setLogin] = useState(true)
-    const types = ["Committee", "Student", "Authority"];
+    const types = ["Committee", "Student", "Faculty"];
     const router = useRouter()
     async function submitHandlerLogin(e){
         e.preventDefault()
@@ -19,13 +19,23 @@ function Index(props){
             password: password
         },{})
         console.log(response.data)
-        localStorage.setItem("id", response.data.user.committeeID)
+       
         localStorage.setItem("user_type", response.data.user.user_type)
+        
         if(response.data.user.user_type==="Committee"){
+            localStorage.setItem("id", response.data.user.committeeID)
             router.push('/committee')
         }
-        if(response.data.user.user_type==="Authority"){
-            router.push(`/authorities/${position}`)
+        if(response.data.user.user_type==="Student"){
+            localStorage.setItem("id", response.data.studentID)
+            router.push('/students')
+        }
+        if(response.data.user.user_type==="Faculty"){
+            localStorage.setItem("id", response.data.user.facultyID)
+            const res=await axios.get(`http://localhost:5000/api/faculty?id=${response.data.user.facultyID}`)
+            console.log(res.data)
+            router.push(`/authorities/${res.data[0].designation}`)
+
         }
     }
     async function submitHandlerSignup(e){
@@ -39,12 +49,16 @@ function Index(props){
         console.log(response.data)
        
         localStorage.setItem("user_type", response.data.user.user_type)
+        if(response.data.user.user_type==="Student"){
+            localStorage.setItem("id", response.data.user.studentID)
+            router.push('/students')
+        }
         if(response.data.user.user_type==="Committee"){
             localStorage.setItem("id", response.data.user.committeeID)
             router.push('/committee/signup')
         }
-        if(response.data.user.user_type==="Authority"){
-            localStorage.setItem("id", response.data.user.id)
+        if(response.data.user.user_type==="Faculty"){
+            localStorage.setItem("id", response.data.user.facultyID)
             router.push('/authorities/signup')
         }
     }
