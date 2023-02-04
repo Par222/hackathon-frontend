@@ -6,6 +6,7 @@ import moment from "moment/moment";
 function EventCard(props) {
   const [showModal, setModal] = useState(false);
   const [eventDet, setEventDet] = useState({});
+  //const router = useRouter();
   const closeHandler = () => {
     setModal(false);
   };
@@ -48,20 +49,27 @@ function EventCard(props) {
 
   // },]
   return (
-    <div>
+    <div className={`${showModal ? "h-[70vh] overflow-hidden" : ""}`}>
       {showModal && (
         <GenericModal
           closeHandler={closeHandler}
-          
+          isStepModal={false}
+          setTitle={false}
         >
-          <div className=" grid grid-rows-2 justify-between w-full">
+          <div className=" w-full ">
             <div>
-              <img src={eventDet.banner} alt="" />
+              <img src={eventDet.banner} alt="" className="w-full" />
             </div>
             <div className="px-5">
               <div className="flex mt-3 mb-6">
                 <div className="text-3xl font-semibold">{eventDet.name}</div>
-                <div className="text-3xl px-3 font-semibold flex">
+                <div
+                  className="text-3xl px-3 font-semibold flex"
+                  onClick={() => {
+                    router.push(`/committee/editevent/${eventDet._id}`);
+                    // console.log("click")
+                  }}
+                >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"
@@ -75,7 +83,7 @@ function EventCard(props) {
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-x-16 gap-y-6">
-                <div className="text-lg flex ">
+                <div className="text-sm flex ">
                   <div className="w-4 flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -91,7 +99,7 @@ function EventCard(props) {
                     {moment(eventDet.date).format("DD-MM-YYYY")}
                   </div>
                 </div>
-                <div className="text-lg flex">
+                <div className="text-sm flex">
                   <div className="w-4 flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +115,7 @@ function EventCard(props) {
                     {moment(eventDet.time).format("HH:MM")}
                   </div>
                 </div>
-                <div className="text-lg flex">
+                <div className="text-sm flex">
                   <div className="w-4 flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -121,7 +129,7 @@ function EventCard(props) {
                   </div>{" "}
                   <div className="px-2">{eventDet.venue}</div>
                 </div>
-                <div className="text-lg flex">
+                <div className="text-sm flex">
                   <div className="w-4 flex items-center">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -131,12 +139,14 @@ function EventCard(props) {
                         fill="#5F5F5F"
                         d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288H175.5L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H272.5L349.4 44.6z"
                       />
-                    </svg>
+                </svg>
                   </div>{" "}
-                  <div className="px-2">{eventDet.type}</div>
+                  <div className="px-2">{eventDet.domain}</div>
                 </div>
               </div>
-              <div className="text-lg mt-6 mb-3">{eventDet.description}</div>
+              <div className="text-lg mt-6 mb-3 ">
+                {eventDet.description}
+              </div>
             </div>
           </div>
         </GenericModal>
@@ -157,19 +167,19 @@ function EventCard(props) {
                 className="h-full w-full object-contain object-center"
               />
             </div>
-            <div
+            {/* <div
               id="content"
               className="bg-blackShade-50 py-3 px-3 grid grid-cols-2 gap-3 -translate-y-8 "
             >
               <div className="text-xl font-semibold">{event.name}</div>
               <div className="text-lg ">
-                Date: {moment(event.date).format("DD-MM-YYYY")}
+                Date: {moment(event.date).format('DD-MM-YYYY')}
               </div>
               <div className="text-lg ">
-                Time: {moment(event.time).format("HH:MM")}
+                Time: {moment(event.time).format('HH:MM')}
               </div>
               <div className="text-lg ">Venue: {event.venue}</div>
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
