@@ -57,7 +57,7 @@ function UpcomingTable(props){
                     </div>
                 ))}
             </div>
-            <div className="flex justify-end">View All</div>
+            <div className="flex justify-end px-20 py">View All</div>
         </div>
     )
 }
