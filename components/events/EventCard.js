@@ -61,7 +61,7 @@ function EventCard(props){
                             <div className="text-3xl font-semibold">
                                 {eventDet.name}
                             </div>
-                            <div className="text-3xl px-3 font-semibold flex" onClick={() => {
+                            <div className="text-3xl px-3 font-semibold flex hover:cursor-pointer" onClick={() => {
                                 router.push(`/committee/editevent/${eventDet._id}`)
                                 // console.log("click")
                             }}>

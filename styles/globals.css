@@ -37,3 +37,6 @@ a {
   background-size: 1550px 1000px;
 }
 
+.dual-background{
+  background: linear-gradient(110deg, #22272E 60%, #db2777 60%)
+}
