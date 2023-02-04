@@ -1,6 +1,7 @@
 import { use, useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
+import UpcomingTable from "../../../components/committee/UpcomingTable";
 const Index = () => {
   const [profile, setProfile] = useState({});
   const router=useRouter()
@@ -32,9 +33,14 @@ const Index = () => {
         <p className="font-Heading">{profile.description}</p>
         <p className=" my-5 text-lg font-medium">Faculty Mentor : {"D.r. Surekha Dholay"}</p>
       </div>
-    
+   
      
     </div>
+    <div className="translate-y-[-200px] px-20">
+   <h1 className=" border-b-2 border-pink-500 text-pink-500 text-sm my-5 w-[5%]  py-2   ">Penidng Events Status</h1>
+    <UpcomingTable></UpcomingTable>
+    </div>
+   
    
     </>
   );
