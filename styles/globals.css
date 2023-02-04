@@ -29,3 +29,10 @@ a {
     background: black;
   }
 }
+.bg{
+  background-image: url("https://img.freepik.com/free-vector/stream-binary-code-design_53876-97406.jpg?w=1060&t=st=1675496766~exp=1675497366~hmac=5c3bcdf73c63c8d617badfd1393194e34427d7f134b1712f9fd9c940c3e5ca9d");
+  object-fit: contain;
+  object-position: center;
+  background-repeat: no-repeat;
+  background-size: 1550px 1000px;
+}
