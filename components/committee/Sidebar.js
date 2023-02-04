@@ -25,22 +25,22 @@ const Sidebar = (props) => {
         // }
     },[router.pathname]);
     return(
-        <div className="w-full bg-white items-center flex text-black font-semibold text-lg flex-row bg-tertiaryblue-200 justify-between ">
-            <div className="px-5 py-5 font-bold text-3xl ">
-                Committee
+        <div className="w-full  items-center flex  font-semibold text-lg flex-row  bg-tertiaryblue-100 inset-0 z-50   opacity-80 justify-between ">
+            <div className="px-5 py-5 font-medium text-3xl text-white ">
+                Committe Collab
             </div>
             <div className="flex flex-row px-5 space-x-2">
                 <Link href="/committee">
-                    <div className={` ${tabClicked === "overview" ? "border-b-2" : "bg-white"} transition-all duration-200 hover:border-b-2 px-5 py-4 cursor-pointer`} id="overview">Overview</div>
+                    <div className={` ${tabClicked === "overview" ? "border-b-2 border-pink-500 text-pink-500" : ""} transition-all  hover:border-b-2 px-5 py-4 cursor-pointer`} id="overview">Overview</div>
                 </Link>            
                 <Link href="/committee/events">
-                    <div className={`  ${tabClicked === "events" ? "border-b-2" : "bg-white"} transition-all duration-200 hover:border-b-2 px-5 py-4 cursor-pointer`} id="event details">Events</div>
+                    <div className={`  ${tabClicked === "events" ? "border-b-2 border-pink-500 text-pink-500" : ""} transition-all  hover:border-b-2 px-5 py-4 cursor-pointer`} id="event details">Events</div>
                 </Link>
                 <Link href="/committee/members">
-                    <div className={`  ${tabClicked === "members" ? "border-b-2" : "bg-white"} transition-all duration-200 hover:border-b-2 px-5 py-4 cursor-pointer`} id="members details">Members</div>
+                    <div className={`  ${tabClicked === "members" ? "border-b-2 border-pink-500 text-pink-500" : ""} transition-all  hover:border-b-2 px-5 py-4 cursor-pointer`} id="members details">Members</div>
                 </Link>
                 <Link href="/committee/profile">
-                    <div className={`  ${tabClicked === "profile" ? "border-b-2" : "bg-white"} transition-all duration-200 hover:border-b-2 px-5 py-4 cursor-pointer`} id="profile details">Profile</div>
+                    <div className={`  ${tabClicked === "profile" ? "border-b-2 border-pink-500 text-pink-500" : ""} transition-all  hover:border-b-2 px-5 py-4 cursor-pointer`} id="profile details">Profile</div>
                 </Link>
                 {/* <Link href="/ambulance">
                     <div className={`hover:bg-tertiaryblue-50  hover:text-white  ${tabClicked === "ambulance" ? "bg-tertiaryblue-50  text-white rounded-lg" : "bg-white"} transition-all duration-200 border-b-2 px-5 py-4 hover:rounded-lg cursor-pointer`} id="ambulance details">Ambulance Details</div>
