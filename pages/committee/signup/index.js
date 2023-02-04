@@ -9,6 +9,7 @@ import {
   uploadBytes,
   getMetadata,
 } from "firebase/storage";
+import axios from "axios";
 const Index = () => {
   const [name, setName] = useState("");
   const [des, setDes] = useState("");
@@ -33,19 +34,21 @@ const Index = () => {
       console.log(error);
     }
   };
-
-  const submitHandler = (e) => {
+  
+  const submitHandler = async(e) => {
     e.preventDefault();
 
     let signupInfo = {
       type: type,
       name,
       description: des,
-      user_type: "Committee",
-      banner,
+      logo:banner,
       faculty,
+      committeeID:"63de15b7f456e9d7eb1e048a"
     };
-    console.log(signupInfo);
+    let id="63de15b7f456e9d7eb1e048a"
+    const result=await axios.patch(`http://localhost:5000/api/committee/${id}`,signupInfo)
+    
   };
   const upload = (accepted, rejected) => {
     setImageArray([...accepted]);
@@ -118,7 +121,7 @@ const Index = () => {
             uploadFiles={upload}
           ></DropFileUpload>
           {Uploaded && (
-            <img src={URL.createObjectURL(image[image.length - 1])}></img>
+            <img src={URL.createObjectURL(image[image.length - 1])} className="h-[100px] w-[100px]"></img>
           )}
           <label htmlFor="email" className="my-2 ">
             Faculty-in-charge<span className="text-red-600">*</span>

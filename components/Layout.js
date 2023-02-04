@@ -2,7 +2,7 @@ import Sidebar from "./committee/Sidebar"
 
 function Layout({children}){
     return(
-        <div className="bg-tertiaryblue-100 text-tertiarywhite-50 flex flex-col min-h-screen">
+        <div className="bg-tertiaryblue-100 text-tertiarywhite-50 flex flex-col min-h-screen relative">
             <Sidebar></Sidebar>
             {children}
         </div>
