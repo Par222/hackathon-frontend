@@ -2,15 +2,23 @@ import { useContext, useEffect, useState } from "react";
 import GenericModal from "../common/GenericModal";
 import { eventListContext } from "../../context/eventsContext";
 import moment from "moment/moment";
+import axios from "axios";
 
 function EventCard(props) {
   const [showModal, setModal] = useState(false);
   const [eventDet, setEventDet] = useState({});
+  const [venue, setVenue] = useState('')
   //const router = useRouter();
   const closeHandler = () => {
     setModal(false);
   };
+  async function getVenue(event){
+    // console.log(eventDet)
+    const response = await axios.get(`http://localhost:5000/api/events/venues?id=${event.venue}`)
+    console.log(response)
+  }
   const { events, setEvent } = useContext(eventListContext);
+  console.log(events)
   // const events=[{
   //     "name": "SPIT Hackathon",
   //     "description": "Hacking",
@@ -48,6 +56,9 @@ function EventCard(props) {
   //     "banner": "https://storage.googleapis.com/download/storage/v1/b/face-server-c2fcd.appspot.com/o/resources%2FpnWWqVadcHzf.png?generation=1641895546480687&alt=media",
 
   // },]
+//   useEffect(() => {
+//     getVenue()
+//   },[eventDet])
   return (
     <div className={`${showModal ? "h-[70vh] overflow-hidden" : ""}`}>
       {showModal && (
@@ -158,6 +169,8 @@ function EventCard(props) {
             onClick={() => {
               setModal(true);
               setEventDet(event);
+              console.log(event)
+              // getVenue(event)
             }}
           >
             <div id="header" className="h-50 opacity-90 ">

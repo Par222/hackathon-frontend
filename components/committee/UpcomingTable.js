@@ -54,7 +54,7 @@ function UpcomingTable(props){
     }
     return(
         <div>
-            <div id="table" className="grid grid-cols-4 gap-10 px-20 mt-10 ">
+            <div id="table" className="grid grid-cols-2 gap-10 px-10 mt-5 ">
                 {eventArr.map((event) => (
                     <div className=" rounded-sm ">
                         <div id="header" className="h-45 opacity-90 ">
@@ -62,16 +62,16 @@ function UpcomingTable(props){
                         </div>
                        
                             <div className="text-xl font-semibold px-3">
-                                {event.status==="approved"?<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-8 -translate-y-24" data-tooltip-content={event.status} id="icon"><path fill="#75BE17" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>:<></>} {event.status === "pending"?<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-8 -translate-y-24" data-tooltip-content={event.status} id="icon"><path fill="#fab005" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zm32 224c0 17.7-14.3 32-32 32s-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32z"/></svg>:<></>}
+                                {event.status==="approved"?<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-8 -translate-y-10" data-tooltip-content={event.status} id="icon"><path fill="#75BE17" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>:<></>} {event.status === "pending"?<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-8 -translate-y-10 translate-x-[250px]" data-tooltip-content={event.status} id="icon"><path fill="#fab005" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zm0-384c13.3 0 24 10.7 24 24V264c0 13.3-10.7 24-24 24s-24-10.7-24-24V152c0-13.3 10.7-24 24-24zm32 224c0 17.7-14.3 32-32 32s-32-14.3-32-32s14.3-32 32-32s32 14.3 32 32z"/></svg>:<></>}
                             
                            
                         </div>
                     </div>
                 ))}
             </div>
-            <div className="flex justify-end px-20 py-2 cursor-pointer" onClick={() => {
+            {eventArr.length>=3?<div className="flex justify-end px-20 py-2 cursor-pointer" onClick={() => {
                 setViewAll(!clickedViewAll)
-            }}>{clickedViewAll?"View All>>": "View Less<<"}</div>
+            }}>{clickedViewAll?"View All>>": "View Less<<"}</div>:<></>}
             {/* <ReactTooltip anchorId="icon"/> */}
         </div>
     )
