@@ -25,7 +25,7 @@ const Sidebar = (props) => {
         // }
     },[router.pathname]);
     return(
-        <div className="w-[100vw] bg-white items-center flex text-black font-semibold text-lg flex-row bg-tertiaryblue-200 justify-between ">
+        <div className="w-full bg-white items-center flex text-black font-semibold text-lg flex-row bg-tertiaryblue-200 justify-between ">
             <div className="px-5 py-5 font-bold text-3xl ">
                 Committee
             </div>
