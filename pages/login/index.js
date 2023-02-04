@@ -20,8 +20,12 @@ function Index(props){
         },{})
         console.log(response.data)
         localStorage.setItem("id", response.data.user.committeeID)
+        localStorage.setItem("user_type", response.data.user.user_type)
         if(response.data.user.user_type==="Committee"){
             router.push('/committee')
+        }
+        if(response.data.user.user_type==="Authority"){
+            router.push(`/authorities/${position}`)
         }
     }
     async function submitHandlerSignup(e){
@@ -33,9 +37,15 @@ function Index(props){
             user_type: type
         },{})
         console.log(response.data)
-        localStorage.setItem("id", response.data.user.committeeID)
+       
+        localStorage.setItem("user_type", response.data.user.user_type)
         if(response.data.user.user_type==="Committee"){
+            localStorage.setItem("id", response.data.user.committeeID)
             router.push('/committee/signup')
+        }
+        if(response.data.user.user_type==="Authority"){
+            localStorage.setItem("id", response.data.user.id)
+            router.push('/authorities/signup')
         }
     }
     return(

@@ -6,7 +6,8 @@ import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
-  if(router.pathname.includes('committee')){
+  if (typeof window !== 'undefined'){
+  if(localStorage.getItem("id")){
     return (<EventsContext>
     <Layout>
       <Component {...pageProps} />
@@ -16,7 +17,7 @@ function MyApp({ Component, pageProps }) {
     return (<EventsContext>
       <Component {...pageProps} />
     </EventsContext>)
-  
+  }
 }
 
 export default MyApp;

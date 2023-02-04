@@ -2,11 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import GenericModal from "../common/GenericModal";
 import { eventListContext } from "../../context/eventsContext";
 import moment from "moment/moment";
-
+import { useRouter } from "next/router";
 function EventCard(props) {
   const [showModal, setModal] = useState(false);
   const [eventDet, setEventDet] = useState({});
-  //const router = useRouter();
+  const router = useRouter();
   const closeHandler = () => {
     setModal(false);
   };
