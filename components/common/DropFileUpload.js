@@ -15,7 +15,7 @@ function DropFileUpload(props) {
           <div
             {...getRootProps()}
             className={`
-              text-tertiaryBlue-600 block w-full text-center cursor-pointer 
+              text-tertiaryBlue-600 block w-[100%] text-center cursor-pointer 
               border-2 border-tertiary-375 hover:border-tertiary-400 
               border-dashed p-7 rounded-md transition-all`}
           >
