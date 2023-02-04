@@ -3,6 +3,7 @@ import {useRouter} from "next/router";
 import { useEffect, useState } from "react";
 const Sidebar = (props) => {
     const [tabClicked, setTabClicked] = useState("overview");
+    let id=localStorage.getItem("id")
     const router = useRouter();
     useEffect(() => {
         if(router.pathname === "/committee"){
@@ -14,7 +15,7 @@ const Sidebar = (props) => {
         else if(router.pathname === "/committee/members"){
             setTabClicked("members")
         }
-        else if(router.pathname === "/committee/profile"){
+        else if(router.pathname === `/committee/profile/${id}`){
             setTabClicked("profile")
         }
         // else if(router.pathname === "/warddetails"){
@@ -39,7 +40,7 @@ const Sidebar = (props) => {
                 <Link href="/committee/members">
                     <div className={`  ${tabClicked === "members" ? "border-b-2 border-pink-500 text-pink-500" : ""} transition-all  hover:border-b-2 px-5 py-4 cursor-pointer`} id="members details">Members</div>
                 </Link>
-                <Link href="/committee/profile">
+                <Link href={`/committee/profile/${id}`}>
                     <div className={`  ${tabClicked === "profile" ? "border-b-2 border-pink-500 text-pink-500" : ""} transition-all  hover:border-b-2 px-5 py-4 cursor-pointer`} id="profile details">Profile</div>
                 </Link>
                 {/* <Link href="/ambulance">
@@ -52,7 +53,9 @@ const Sidebar = (props) => {
                     <div className={`hover:bg-tertiaryred-50 absolute top-[87%]  hover:text-white  ${tabClicked === "ward" ? "bg-tertiaryblue-50  text-white rounded-lg" : "bg-white"} transition-all duration-200 border-2 border-red-500 bg-red-500 px-16 py-4 rounded-lg cursor-pointer`} id="ward details">Sign Out</div>
                 </Link> */}
             </div>
-            <button className="bg-pink-600 text-sm  py-1 px-6 rounded-sm">Logout</button>
+            <button className="bg-pink-600 text-sm  py-1 px-6 rounded-sm" onClick={()=>{
+                router.push('/login')
+                localStorage.removeItem("user")}}>Logout</button>
         </div>
     );
 };

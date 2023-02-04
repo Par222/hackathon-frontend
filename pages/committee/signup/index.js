@@ -10,6 +10,7 @@ import {
   getMetadata,
 } from "firebase/storage";
 import axios from "axios";
+import { useRouter } from "next/router";
 const Index = () => {
   const [name, setName] = useState("");
   const [des, setDes] = useState("");
@@ -17,6 +18,7 @@ const Index = () => {
   const [banner, setBanner] = useState("");
   const [faculty, setFaculty] = useState("");
   const [image, setImageArray] = useState([]);
+  const [id,setId]=useState(localStorage.getItem("id"))
   const [Uploaded, setIsUploaded] = useState(false);
   const types = ["National level", "College Level", "Departmental"];
 
@@ -34,20 +36,23 @@ const Index = () => {
       console.log(error);
     }
   };
-  
+  const router=useRouter()
   const submitHandler = async(e) => {
     e.preventDefault();
-
+     
+     console.log(id,"user")
     let signupInfo = {
       type: type,
       name,
       description: des,
       logo:banner,
       faculty,
-      committeeID:"63de15b7f456e9d7eb1e048a"
+      committeeID:id
     };
-    let id="63de15b7f456e9d7eb1e048a"
-    const result=await axios.patch(`http://localhost:5000/api/committee/${id}`,signupInfo)
+
+    const result=await axios.patch(`http://localhost:5000/api/committee/${id}`,signupInfo).then(()=>{
+        router.push('/committee/')
+    })
     
   };
   const upload = (accepted, rejected) => {
