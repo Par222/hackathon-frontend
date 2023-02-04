@@ -1,5 +1,6 @@
 module.exports = {
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  content: [ "./pages/**/*.{js,ts,jsx,tsx}",
+  "./components/**/*.{js,ts,jsx,tsx}",],
 
   theme: {
     fontFamily: {
@@ -54,7 +55,7 @@ module.exports = {
         690: "#DCDCDC",
         700: "#BCBCBC",
       },
-      tertiaryblue: { 50: "#256BD3", 60: "#E5EFFF", 100: "#22272E" },
+      tertiaryblue: { 50: "#256BD3", 60: "#E5EFFF",100: "#070c1d", 200: "#22272E" },
       navyblue: {
         100: "165FCC",
         900: "#101A36",
