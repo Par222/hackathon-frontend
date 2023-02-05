@@ -10,7 +10,13 @@ function EventCard(props) {
   const closeHandler = () => {
     setModal(false);
   };
+  async function getVenue(event){
+    // console.log(eventDet)
+    const response = await axios.get(`http://localhost:5000/api/events/venues?id=${event.venue}`)
+    console.log(response)
+  }
   const { events, setEvent } = useContext(eventListContext);
+  console.log(events)
   // const events=[{
   //     "name": "SPIT Hackathon",
   //     "description": "Hacking",
@@ -48,6 +54,9 @@ function EventCard(props) {
   //     "banner": "https://storage.googleapis.com/download/storage/v1/b/face-server-c2fcd.appspot.com/o/resources%2FpnWWqVadcHzf.png?generation=1641895546480687&alt=media",
 
   // },]
+//   useEffect(() => {
+//     getVenue()
+//   },[eventDet])
   return (
     <div className={`${showModal ? "h-[70vh] overflow-hidden" : ""}`}>
       {showModal && (
@@ -143,6 +152,14 @@ function EventCard(props) {
                   </div>{" "}
                   <div className="px-2">{eventDet.domain}</div>
                 </div>
+                <div className="text-sm flex">
+                  <div className="w-4 flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="#5f5f5f" d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0S96 57.3 96 128s57.3 128 128 128zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+                  </div>
+                  <div className="px-2">
+                    {eventDet.registrations.length}
+                  </div>
+                </div>
               </div>
               <div className="text-lg mt-6 mb-3 ">
                 {eventDet.description}
@@ -158,6 +175,8 @@ function EventCard(props) {
             onClick={() => {
               setModal(true);
               setEventDet(event);
+              console.log(event)
+              // getVenue(event)
             }}
           >
             <div id="header" className="h-50 opacity-90 ">

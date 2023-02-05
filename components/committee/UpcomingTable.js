@@ -64,7 +64,7 @@ function UpcomingTable(props) {
   }
   return (
     <div>
-      <div id="table" className="grid grid-cols-4 gap-10 px-20 mt-10 ">
+      <div id="table" className="grid grid-cols-2 gap-10 px-20 mt-10 ">
         {eventArr.map((event) => (
           <div className=" rounded-sm ">
             <div id="header" className="h-45 opacity-90 ">
@@ -117,14 +117,14 @@ function UpcomingTable(props) {
           </div>
         ))}
       </div>
-      <div
+      {eventArr.length>3?<div
         className="flex justify-end px-20 py-2 cursor-pointer"
         onClick={() => {
           setViewAll(!clickedViewAll);
         }}
       >
         {clickedViewAll ? "View All>>" : "View Less<<"}
-      </div>
+      </div>: <></>}
       {/* <ReactTooltip anchorId="icon"/> */}
     </div>
   );
