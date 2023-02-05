@@ -3,7 +3,6 @@ import axios from 'axios';
 import GenericModal from '../../components/common/GenericModal';
 
 const Requests = (props) => {
-  const [requests, setrequests] = useState({});
   const [showModal, setModal] = useState(false)
   const [currentRequest, setRequest] = useState({})
   // const [requestsList, setRequests] = useState([])
@@ -40,22 +39,29 @@ const Requests = (props) => {
     "venue": "Bhavan's Ground",
     "description": "Hacking"
   },]
-  async function getRequests(designation,id){
-    console.log(designation,id)
-    const response = await axios.post(`http://localhost:5000/api/events/requests`,{
-      "designation": designation,
-    })
+  const [request,setRequests]=useState([])
+  const [eventData,setEventData]=useState([])
+  async function getRequests(){
+    const designation=localStorage.getItem("designation")
+    
+    const id=localStorage.getItem("id")
+    const response = await axios.get(`http://localhost:5000/api/approval-request?status_level=0&status=Pending`)
+    setRequests(response.data)
+  
+    
+    
     console.log(response.data)
   }
-  async function getToken(){
-    const id = localStorage.getItem('id');
-    console.log(id)
-    const response = await axios.get(`http://localhost:5000/api/faculty?id=${id}`)
-    console.log(response)
-    // getRequests(response.designation,id );
+  const getEventInfo=async(event)=>{
+    const response = await axios.get(`http://localhost:5000/api/events?id=${event}}`)
+   
+    console.log(response.data.results)
+    return response.data.results
+
+
   }
   useEffect(() => {
-    getToken()
+    getRequests() 
   },[])
   return (
     <div>
@@ -149,14 +155,15 @@ const Requests = (props) => {
             <div className="text-lg">Date</div>
             <div className="text-lg">Action</div>
           </div>
-          {requestsList.map((e) => {
+          {request.requests && request.requests.map((e) => {
             return (
+              
               <div className="flex gap-4 shadow-md shadow-black-lg  hover:border-2 hover:border-pink-400 hover:bg-pink-400/20 cursor-pointer transition-all justify-between items-center bg-tertiaryblue-200 rounded-md p-4" onClick={() => 
               {setModal(true)
               setRequest(e)}}>
-                <div className="text-lg ">{e.name}</div>
-                <div className="text-lg ml-8">{e.committee}</div>
-                <div className="text-lg">{e.date}</div>
+                <div className="text-lg ">{event.name}</div>
+                <div className="text-lg ml-8">{event.committee}</div>
+                <div className="text-lg">{event.date}</div>
                 <div className="flex gap-3 items-center">
                   <button className="w-8 p-1 h-8  rounded-lg text-lime-400">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
