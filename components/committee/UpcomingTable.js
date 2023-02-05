@@ -57,7 +57,7 @@ function UpcomingTable(props) {
     
     const response = await axios.post('http://localhost:5000/api/approval-request',{
         eventID,
-        committeeID:committee
+        
         
     })
 
@@ -110,7 +110,7 @@ function UpcomingTable(props) {
               )}
             </div>
            
-              <button className="bg-pink-600 py-2 px-4 rounded-md mx-20 " onClick={()=>requestHandler(event.id,event.committee)}>
+              <button className="bg-pink-600 py-2 px-4 rounded-md mx-20 " onClick={()=>requestHandler(event.id,event)}>
                 Verify Event
               </button>
             
