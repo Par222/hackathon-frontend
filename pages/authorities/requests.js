@@ -40,15 +40,23 @@ const Requests = (props) => {
     "venue": "Bhavan's Ground",
     "description": "Hacking"
   },]
-  // async function getRequests(){
-  //   const response = await axios.post(`http://localhost:5000/api/events/requests`,{
-  //     "designation": 
-  //   },{})
-  //   console.log(response.data)
-  // }
-  // useEffect(() => {
-  //   getRequests()
-  // },[])
+  async function getRequests(designation,id){
+    console.log(designation,id)
+    const response = await axios.post(`http://localhost:5000/api/events/requests`,{
+      "designation": designation,
+    })
+    console.log(response.data)
+  }
+  async function getToken(){
+    const id = localStorage.getItem('id');
+    console.log(id)
+    const response = await axios.get(`http://localhost:5000/api/faculty?id=${id}`)
+    console.log(response)
+    // getRequests(response.designation,id );
+  }
+  useEffect(() => {
+    getToken()
+  },[])
   return (
     <div>
       {showModal && <GenericModal closeHandler={() => {setModal(false)}}>
@@ -130,7 +138,7 @@ const Requests = (props) => {
             </div>
           </div>
         </GenericModal>}
-      <div className="p-4 w-4/5">
+      <div className="p-4 w-[900px]">
         <h1 className="text-center text-xl mb-2 tracking-wider">
           Pending Approvals
         </h1>
