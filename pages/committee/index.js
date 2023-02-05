@@ -37,7 +37,7 @@ const Index = () => {
                         </div>
                     </div> */}
                 <div className="flex flex-row">
-                    <div className="w-[60%]">
+                    <div className="w-[100%]">
                         <div id="table header" className="text-2xl font-semibold py-5 flex w-full px-10">Upcoming Events: <div className="w-5 px-5 hover:cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-8" onClick={() => {
                                 router.push('/committee/postevents')
@@ -46,9 +46,7 @@ const Index = () => {
                         {/* events table */}
                         <UpcomingTable></UpcomingTable>
                     </div>
-                    <div className="w-[40%] py-10">
-                        <AppointmentCalendar></AppointmentCalendar>
-                    </div>
+                    
                 </div>
             </div>
         </div>

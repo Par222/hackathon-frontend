@@ -40,3 +40,7 @@ a {
 .dual-background{
   background: linear-gradient(110deg, #000000 60%, #db2777 60%)
 }
+
+.dx-scheduler-time-panel-cell .dx-scheduler-date-table-cell{
+  color:#fff
+}
