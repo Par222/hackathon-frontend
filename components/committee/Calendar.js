@@ -1,10 +1,11 @@
-import React, { useState, useContext, useCallback } from "react";
+import React, { useState, useContext, useCallback, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Typography from "@mui/material/FormControl";
 import { styled } from "@mui/material/styles";
+
 import {
   ViewState,
   EditingState,
@@ -20,57 +21,61 @@ import {
   AppointmentTooltip,
   DragDropProvider,
 } from "@devexpress/dx-react-scheduler-material-ui";
+import axios from "axios";
 
 // import AppointmentForm from "./AppointmentForm";
 
-import AppointmentsContext from "../../store/Doctor/appointments-context";
-import CustomizedAppointmentForm from "./AppointmentForm/CustomizedAppointmentForm";
-import {
-  BasicLayout,
-  TextEditor,
-  Layout,
-} from "./AppointmentForm/CustomizedAppointmentForm";
+// import AppointmentsContext from "../../store/Doctor/appointments-context";
+// import CustomizedAppointmentForm from "./AppointmentForm/CustomizedAppointmentForm";
+// import {
+//   BasicLayout,
+//   TextEditor,
+//   Layout,
+// } from "./AppointmentForm/CustomizedAppointmentForm";
 
 function AppointmentCalendar(props) {
-  const appointmentsCtx = useContext(AppointmentsContext);
-  async function getApprovedEvents(){
-    const response = await axios.get(`http://localhost:5000/api/`)
-  }
+//   const appointmentsCtx = useContext(AppointmentsContext);
+    const [eventList, setEventList] = useState([])
+    async function getApprovedEvents(){
+        const response = await axios.get(`http://localhost:5000/api/events/approved`,{},{})
+        console.log(response.data)
+        // setEventList(response.data)
+    }
+
+    useEffect(() => {
+        getApprovedEvents()
+        // if(!eventList){return Loading;}
+    },[])
 
   const [addedAppointment, setAddedAppointment] = useState({});
   const [isAppointmentBeingCreated, setIsAppointmentBeingCreated] =
     useState(false);
   const [showAppointmentForm, setShowAppointmentForm] = useState(false);
   const [currentView, setCurrentView] = useState("Week");
-
-  const appointmentsToBeDisplayed = appointmentsCtx?.appointments.filter(
-    (appointment) => {
-      return appointment?.appointment?.status === "Confirmed";
-    }
-  );
-
-  const calendarAppointments = appointmentsToBeDisplayed.map((appointment) => {
-    const temp = { ...appointment?.appointment };
-    const index = temp?.slot?.start_time.indexOf(".");
+    console.log(eventList)
+  const calendarAppointments = eventList?.map((appointment) => {
+    // const temp = { ...appointment?.appointment };
+    let temp = {}
+    const index = appointment.start_time.indexOf(":");
     let timeHours;
     if (index != -1) {
-      timeHours = temp?.slot?.start_time.substring(0, index);
+      timeHours = appointment.start_time.substring(0, index);
     } else {
-      timeHours = temp?.slot?.start_time.substring(0);
+      timeHours = appointment.start_time.substring(0);
     }
     let timeMinutes;
     if (index != -1) {
-      timeMinutes = temp?.slot?.start_time.substring(index + 1);
+      timeMinutes = appointment.start_time.substring(index + 1);
     }
     const startDate = new Date(
-      new Date(temp?.slot?.date).setHours(timeHours, timeMinutes && timeMinutes || 0)
+      new Date(appointment.date).setHours(timeHours, timeMinutes && timeMinutes || 0)
     );
 
     const endDate = new Date(startDate.getTime() + 1000 * 60 * 60);
 
     temp.startDate = startDate;
     temp.endDate = endDate;
-    temp.title = `${appointment?.patientData?.name} - ${appointment?.appointment?.description?.text}`;
+    temp.title = `${appointment?.name}`;
     return temp;
   });
 
@@ -162,7 +167,7 @@ function AppointmentCalendar(props) {
   // const cust = <CustomizedAppointmentForm {...data[2]}/>
 
   return (
-      <Scheduler data={calendarAppointments} height={600}>
+      <Scheduler data={calendarAppointments} height={300}>
         <ViewState currentViewName={currentView} currentDate={new Date()} />
         <EditingState
           onCommitChanges={onCommitChanges}

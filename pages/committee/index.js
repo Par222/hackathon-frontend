@@ -36,17 +36,19 @@ const Index = () => {
                             <BarChart></BarChart>
                         </div>
                     </div> */}
-                <div className="w-[50%]">
-                    <div id="table header" className="text-2xl font-semibold py-5 flex w-full px-10">Upcoming Events: <div className="w-5 px-5 hover:cursor-pointer">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-8" onClick={() => {
-                            router.push('/committee/postevents')
-                        }}><path fill="#fff" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg></div>
+                <div className="flex flex-row">
+                    <div className="w-[60%]">
+                        <div id="table header" className="text-2xl font-semibold py-5 flex w-full px-10">Upcoming Events: <div className="w-5 px-5 hover:cursor-pointer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="w-8" onClick={() => {
+                                router.push('/committee/postevents')
+                            }}><path fill="#fff" d="M256 512c141.4 0 256-114.6 256-256S397.4 0 256 0S0 114.6 0 256S114.6 512 256 512zM232 344V280H168c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H280v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg></div>
+                        </div>
+                        {/* events table */}
+                        <UpcomingTable></UpcomingTable>
                     </div>
-                    {/* events table */}
-                    <UpcomingTable></UpcomingTable>
-                </div>
-                <div className="w-[50%]">
-                    <AppointmentCalendar></AppointmentCalendar>
+                    <div className="w-[40%] py-10">
+                        <AppointmentCalendar></AppointmentCalendar>
+                    </div>
                 </div>
             </div>
         </div>

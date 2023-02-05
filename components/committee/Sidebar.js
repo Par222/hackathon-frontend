@@ -55,7 +55,7 @@ const Sidebar = (props) => {
             </div>
             <button className="bg-pink-600 text-sm  py-1 px-6 rounded-sm" onClick={()=>{
                 router.push('/login')
-                localStorage.removeItem("user")}}>Logout</button>
+                localStorage.removeItem("id")}}>Logout</button>
         </div>
     );
 };
