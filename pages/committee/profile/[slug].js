@@ -37,8 +37,7 @@ const Index = () => {
      
     </div>
     <div className="translate-y-[-200px] px-20">
-   <h1 className=" border-b-2 border-pink-500 text-pink-500 text-sm my-5 w-[5%]  py-2   ">Penidng Events Status</h1>
-    <UpcomingTable></UpcomingTable>
+   
     </div>
    
    

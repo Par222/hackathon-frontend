@@ -48,8 +48,10 @@ const Index = () => {
     }
   };
   const [count, setCount] = useState(1);
+
   const submitHandler = async (e) => {
     e.preventDefault();
+    const id=localStorage.getItem("id")
 
     let eventInfo = {
       name,
@@ -57,7 +59,7 @@ const Index = () => {
       date,
       startTime,
       endTime,
-      committee: "123",
+      committee:id ,
       banner,
       venue:id,
       domain: type,

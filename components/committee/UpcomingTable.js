@@ -57,7 +57,7 @@ function UpcomingTable(props) {
     
     const response = await axios.post('http://localhost:5000/api/approval-request',{
         eventID,
-        committeeID:committee
+        
         
     })
 
