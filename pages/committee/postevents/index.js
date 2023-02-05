@@ -51,7 +51,7 @@ const Index = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const id=localStorage("id")
+    const id=localStorage.getItem("id")
 
     let eventInfo = {
       name,
