@@ -5,9 +5,11 @@ export const eventListContext = React.createContext()
 
 function EventsContext({children}){
     const [events, setEvents] = useState([])
+    const id=localStorage.getItem("id")
     async function getEvents(){
         const response = await axios.get('http://localhost:5000/api/events',{},{})
-        setEvents(response.data)
+
+        setEvents(response.data.filter((event)=>event.committee == id))
         console.log(response)
     }
     useEffect(() => {
