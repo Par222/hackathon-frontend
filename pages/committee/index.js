@@ -46,7 +46,7 @@ const Index = () => {
                         {/* events table */}
                         <UpcomingTable></UpcomingTable>
                     </div>
-                    <div className="w-[40%] py-10">
+                    <div className="w-[40%] my-24 pr-10">
                         <AppointmentCalendar></AppointmentCalendar>
                     </div>
                 </div>

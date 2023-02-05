@@ -64,7 +64,7 @@ function UpcomingTable(props) {
   }
   return (
     <div>
-      <div id="table" className="grid grid-cols-2 gap-10 px-20 mt-10 ">
+      <div id="table" className="grid grid-cols-2 gap-10 px-10 mt-5 ">
         {eventArr.map((event) => (
           <div className=" rounded-sm ">
             <div id="header" className="h-45 opacity-90 ">
@@ -110,9 +110,11 @@ function UpcomingTable(props) {
               )}
             </div>
            
-              <button className="bg-pink-600 py-2 px-4 rounded-md mx-20 " onClick={()=>requestHandler(event.id,event.committee)}>
-                Verify Event
-              </button>
+              <div className="flex justify-center">
+                <button className="bg-pink-600 py-2 px-4 rounded-md" onClick={()=>requestHandler(event.id,event.committee)}>
+                    Verify Event
+                </button>
+              </div>
             
           </div>
         ))}
