@@ -2,13 +2,17 @@ import { async } from "@firebase/util";
 import Modal from "../../components/committee/Modal";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 const Index = () => {
+  const router = useRouter()
   const [relevant, setRelevant] = useState([]);
   const [selected, setSelected] = useState({});
   const [id, setId] = useState("");
   const [currentEvent, setCurrentEvent] = useState({});
   const [count, setCount] = useState(0);
   const [event, setEvents] = useState([]);
+  const [eventRow, setEventRow] = useState({}) 
+  const [clicked, setClick] = useState(false)
   const fetchEvents = async () => {
     const response = await axios.get(`http://localhost:5000/api/events`);
     setEvents(response.data);
@@ -28,6 +32,9 @@ const Index = () => {
       `http://localhost:5000/api/committee?name=${name}`
     );
     setRelevant(response.data);
+    // console.log(response.data)
+    setClick(true)
+    console.log(relevant)
   };
   return (
     <>
@@ -95,23 +102,34 @@ const Index = () => {
                 </div>
               </div>
             </div>
-            <h1 className="text-whote text-lg my-5 px-10">
-              Search For Committees
-            </h1>
-            <form className="px-10 " onSubmit={submitHandler}>
-              <></>
-              <input
-                className="bg-white w-[40%] py-2 rounded-sm text-black shadow-md border "
-                onChange={(e) => setName(e.target.value)}
-              ></input>
-              <button className=" py-3 px-8 mx-5 rounded-sm bg-pink-600 border-white  ">
-                Search
-              </button>
-              <></>
-            </form>
+            <div>
+              <h1 className="text-whote text-lg my-5 px-10">
+                Search For Committees
+              </h1>
+              <form className="px-10 " onSubmit={submitHandler}>
+                <></>
+                <input
+                  className="bg-white w-[40%] py-2 px-2 rounded-sm text-black shadow-md border "
+                  onChange={(e) => setName(e.target.value)}
+                ></input>
+                <button type="submit" className=" py-3 px-8 mx-5 rounded-sm bg-pink-600 border-white  ">
+                  Search
+                </button>
+                <></>
+              </form>
+            </div>
           </div>
         </div>
       )}
+      <div className="flex flex-col px-10">{relevant.map((row) => {
+          return(<div className="w-[40%] bg-tertiaryblue-200 py-2 px-3 border-b-2 flex justify-center flex-row">
+              {row.logo?<div className="hover:cursor-pointer" onClick={() => {
+                router.push(`/committee/profile/${row._id}`)
+              }}><img src={row.logo} className='w-10 py-2'></img>{row.name}</div>:<div  className="hover:cursor-pointer" onClick={() => {
+                router.push(`/committee/profile/${row._id}`)
+              }}>{row.name}</div>}
+          </div>)
+      })}</div>
     </>
   );
 };

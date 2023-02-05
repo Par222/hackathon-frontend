@@ -1,9 +1,12 @@
-import { use, useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
 import UpcomingTable from "../../../components/committee/UpcomingTable";
+import { eventListContext } from "../../../context/eventsContext";
 const Index = () => {
   const [profile, setProfile] = useState({});
+  const [commEvents, setEvents] = useState([])
+  const [eventsList, setEventsList] = useState({})
   const router=useRouter()
   const fetchDetails = async () => {
     
@@ -11,8 +14,20 @@ const Index = () => {
     let id=router.query.slug
     const result=await axios.get(`http://localhost:5000/api/committee/${id}`)
     setProfile(result.data.committee)
+    const response = await axios.get('http://localhost:5000/api/events')
+    setEventsList(response.data)
     //console.log(result.data.committee)
   };
+  console.log(profile)
+  console.log(eventsList)
+  if(eventsList.length>0){
+    eventsList.forEach((e) => {
+    if(e.committee === router.query.slug && !commEvents.includes(e)){
+      commEvents.push(e)
+    }
+  })
+  }
+  console.log(commEvents)
   useEffect(() => {
     fetchDetails();
   }, []);
@@ -33,12 +48,8 @@ const Index = () => {
         <p className="font-Heading">{profile.description}</p>
         <p className=" my-5 text-lg font-medium">Faculty Mentor : {"D.r. Surekha Dholay"}</p>
       </div>
-   
-     
     </div>
-    <div className="translate-y-[-200px] px-20">
-   
-    </div>
+    
    
    
     </>

@@ -81,7 +81,7 @@ function Modal(props) {
             <div className="flex justify-center ">
               <img src={props.event.banner} alt="" className=" h-[450px] " />
             </div>
-            <div className="px-5 ">
+            <div className="px-5 my-10">
               <div className="flex mt-3 mb-6">
                 <div className="text-3xl font-semibold">{props.event.name}</div>
               </div>
