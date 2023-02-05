@@ -1,8 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const Requests = (props) => {
-  const [requests, setrequests] = useState({});
+  const [requests, setrequests] = useState([]);
+  useEffect(() => {
+    const facultyid = localStorage.getItem('id');
+    const data = axios.get(`http://localhost:5000/api/faculty?id=${facultyid}`);
+    const type = data.designation;
+    axios
+      .post('http://localhost:5000/api/events/requests', { designation: type })
+      .then((e) => {
+        setrequests(e.data || []);
+      });
+  }, []);
   return (
     <div className="p-4 w-4/5">
       <h1 className="text-center text-xl mb-2 tracking-wider">
@@ -15,7 +25,8 @@ const Requests = (props) => {
           <div className="text-lg">Date</div>
           <div className="text-lg">Action</div>
         </div>
-        {[1, 2, 4, 4].map((e) => {
+
+        {requests.map((e) => {
           return (
             <div className="flex gap-4 shadow-md shadow-black-lg  hover:border-2 hover:border-pink-400 hover:bg-pink-400/20 cursor-pointer transition-all justify-between items-center bg-tertiaryblue-200 rounded-md p-4">
               <div className="text-lg ">Hackathon</div>
